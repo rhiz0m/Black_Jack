@@ -12,7 +12,7 @@ public class Game {
 
 
     // <-- Start Menu Method -->
-    public static void enterStartMenu() {
+    public static void runStartMenu() {
 
         System.out.print("""
                
@@ -39,7 +39,7 @@ public class Game {
 
             switch (scan.next()) {
                 case "0" -> {
-                    System.out.println("-Thank you for playing!");
+                    System.out.println("-Ok, maybe another time then!");
                     playGame = false;
                 }
                 case "1" -> User.betting();
@@ -63,7 +63,7 @@ public class Game {
         // <-- Shuffle cards -->
         //Shuffle the list by Collections.shuffle, then returning an object representation.
         Collections.shuffle(deckOfCards);
-        System.out.println("Great, Now " + Game.dealer.getName() + " shuffles the deck of cards.\n");
+        System.out.println("Great. Now the dealer " + Game.dealer.getName() + " will shuffle the deck of cards.\n");
         //System.out.println(Game.user.getMoney()-Game.user.getUsersBet());
         System.out.println("♥ Press 1 + RETURN to start the GAME ♤");
 
@@ -73,6 +73,7 @@ public class Game {
             switch (scan.next()) {
                 case "0": {
                     isPlaying = false;
+                    System.exit(0);
                 }
                 case "1": {
                     dealer.calcHit(deckOfCards, deckOfCards);
@@ -84,13 +85,11 @@ public class Game {
                 break;
                 case "2":
                     dealer.calcStay(deckOfCards);
-                    dealer.checkMoneyBounds();
                     break;
                 default:
-                    System.out.println("Enter a valid number: 1 + RETURN to PLAY, 0 + RETURN to Quit!");
+                    System.out.println("-Enter a valid number: 1 + RETURN to PLAY, 0 + RETURN to Quit!");
                     break;
             }
-
         } while (isPlaying);
     }
 
@@ -107,7 +106,13 @@ public class Game {
         do {
 
             switch (scan.next()) {
-                case "0" -> playGame = false;
+
+                case "0" -> {
+                    System.out.println("-Thank You " + Game.user.getName() + " for PLAYING!");
+                    playGame = false;
+                    System.exit(0);
+
+                }
                 case "1" -> User.betting();
                 default -> System.out.println("Enter a valid number: 1 + RETURN to PLAY, 0 + RETURN to EXIT GAME!");
             }

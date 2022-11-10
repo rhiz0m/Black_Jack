@@ -29,20 +29,24 @@ public class User extends Participants {
         int newCurrency = initialCurrency - usersBet;
 
         boolean isAsking = true;
-        do {
 
-            if ((usersBet >= 2) && (usersBet <= 500)) {
+        do {
+            if ((usersBet > 1) && (usersBet <= 500)) {
                 System.out.println("-You bet " + usersBet + " $ and have " + newCurrency +
                         " $ left!");
                 Game.runGameEngine();
 
             } else if (usersBet == 0) {
-                System.out.println("You are about to EXIT the game!\nPress 0 + RETURN once more end the GAME!");
+                System.out.println("-Thanks You " + Game.user.getName() + " for PLAYING!");
                 isAsking = false;
+                System.exit(0);
+
             } else {
-                System.out.println("Enter a valid number between 2 and 500");
+                System.out.println("-Enter a valid number between 2 and 500");
+                isAsking = false;
             }
 
-        } while(isAsking);
+        } while (isAsking);
+
     }
 };

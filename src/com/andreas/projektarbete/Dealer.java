@@ -64,6 +64,11 @@ public class Dealer extends Participants {
         int userWinMoney = userMoney + usersBet;
         int userLosesMoney = userMoney - usersBet;
 
+        if (userLosesMoney <= 0 || userMoney <= 0) {
+            System.out.println("---♤ | GAME OVER | ♤ --- you have no money left...");
+            System.exit(0);
+        }
+
         // <-- Conditionals to check other cases -->
 
         if (userSum > 21) {
@@ -71,22 +76,25 @@ public class Dealer extends Participants {
             System.out.println("---♤ | You lost! | ♤---\n");
             System.out.println("The Dealer receives your: " + usersBet + " $");
             System.out.println("You have : " + Game.user.setMoney(userLosesMoney) + " $ left");
+            System.out.println("Dealers total:" + Game.dealer.setMoney(dealerWinMoney) + " $");
             System.out.println("Total Wins is: " + Game.dealer.getWins()+ "\n");
             Game.endGameEngine();
 
         } else if (userSum == 21) {
             Game.user.setWins(Game.user.getWins() + 1);
             System.out.println("---♥ | " + Game.user.getName() + " got BLACK JACK! | ♥---");
-            System.out.println("Your bet: " + usersBet);
+            System.out.println("Your bet: " + usersBet + " $ ");
             System.out.println("Your total is now: " + Game.user.setMoney(userWinMoney) + " $");
+            System.out.println("Dealers total:" + Game.dealer.setMoney(dealerLooseMoney) + " $");
             System.out.println("Total Wins is: " + Game.user.getWins()+ "\n");
             Game.endGameEngine();
 
         } else if (dealerSum > 21) {
             Game.user.setWins(Game.user.getWins() + 1);
             System.out.println("---♥ | " + Game.user.getName() + " WON! | ♥---\nThe Dealer exceeded the value 21");
-            System.out.println("You bet: " + usersBet);
+            System.out.println("You bet: " + usersBet + " $ ");
             System.out.println("Your total is now: " + Game.user.setMoney(userWinMoney) + " $");
+            System.out.println("Dealers total:" + Game.dealer.setMoney(dealerLooseMoney)+ " $");
             System.out.println("Total Wins is: " + Game.user.getWins()+ "\n");
             Game.endGameEngine();
 
@@ -94,6 +102,7 @@ public class Dealer extends Participants {
             Game.dealer.setWins(Game.dealer.getWins() + 1);
             System.out.println("The Dealer " + Game.dealer.getName() + " got BLACK JACK!");
             System.out.println("You have : " + Game.user.setMoney(userLosesMoney) + " $ left");
+            System.out.println("Dealers total :" + Game.dealer.setMoney(dealerWinMoney) + " $");
             System.out.println("Total Wins is: " + Game.dealer.getWins()+ "\n");
             Game.endGameEngine();
         }
@@ -107,8 +116,15 @@ public class Dealer extends Participants {
         int usersBet = Game.user.getUsersBet();
         int userMoney = Game.user.getMoney();
         int dealerMoney = Game.dealer.getMoney();
-        int userWinMoney = userMoney + (dealerMoney - usersBet);
+        int dealerWinMoney = dealerMoney + usersBet;
+        int dealerLooseMoney = dealerMoney - usersBet;
+        int userWinMoney = userMoney + usersBet;
         int userLosesMoney = userMoney - usersBet;
+
+        if (userLosesMoney <= 0 || userMoney <= 0) {
+            System.out.println("--- GAME OVER --- you have no money left");
+            System.exit(0);
+        }
 
         int userSumClosest = 21 - userSum;
         int dealerSumClosest = 21 - dealerSum;
@@ -116,22 +132,18 @@ public class Dealer extends Participants {
         if (userSumClosest < dealerSumClosest || dealerSum > 21) {
             Game.user.setWins(Game.user.getWins() + 1);
             System.out.println("---♥ | " + Game.user.getName() + " WON! | ♥---\nThe Dealer exceeded the value 21");
-            System.out.println("You bet: " + usersBet);
+            System.out.println("You bet: " + usersBet + " $ ");
             System.out.println("Your total is now: " + Game.user.setMoney(userWinMoney) + " $");
+            System.out.println("Dealers total: " + Game.dealer.setMoney(dealerLooseMoney) + " $");
             System.out.println("Total Wins is: " + Game.user.getWins()+ "\n");
             Game.endGameEngine();
         } else if (userSumClosest > dealerSumClosest || userSum > 21) {
             System.out.println("---♤ | You lost! | ♤---\n");
             System.out.println("The Dealer receives your: " + usersBet + " $");
             System.out.println("You have total : " + Game.user.setMoney(userLosesMoney) + " $ left");
+            System.out.println("Dealers total: " + Game.dealer.setMoney(dealerWinMoney) + " $");
             System.out.println("Total Wins is: " + Game.dealer.getWins() + "\n");
             Game.endGameEngine();
-        }
-    }
-
-    public void checkMoneyBounds() {
-        if(Game.user.getMoney() <= 0) {
-            System.out.println("you have no money left");
         }
     }
 }
