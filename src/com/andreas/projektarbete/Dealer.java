@@ -69,7 +69,7 @@ public class Dealer extends Participants {
             System.exit(0);
         }
 
-        // <-- Conditionals to check other cases -->
+        // <-- Conditionals to check closest or equal -->
 
         if (userSum > 21) {
             Game.dealer.setWins(Game.dealer.getWins() + 1);

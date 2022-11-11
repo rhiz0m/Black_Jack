@@ -53,7 +53,7 @@ public class Game {
     // <--Game Engine Method-->
     public static void runGameEngine() {
 
-
+        // <-- Starts by clearing cards -->
         dealer.usersCards.clear();
         dealer.dealersCards.clear();
 
@@ -80,7 +80,7 @@ public class Game {
                     System.out.println("""
                             Do you want another card? 
                             ♥ Press 1 + RETURN to HIT   ♤
-                            ♢ Press 2 + Return to STRAY ♧""");
+                            ♢ Press 2 + RETURN to STAY ♧""");
                 }
                 break;
                 case "2":

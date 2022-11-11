@@ -1,7 +1,5 @@
 package com.andreas.projektarbete;
 
-
-
 //SUPERCLASS: Participants
 
 public class Participants {
